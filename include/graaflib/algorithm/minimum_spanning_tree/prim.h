@@ -21,8 +21,9 @@ namespace graaf::algorithm {
  * connected).
  */
 template <typename V, typename E>
-[[nodiscard]] std::optional<tree<V, E, graph_type::UNDIRECTED>> prim_minimum_spanning_tree(
-    const graph<V, E, graph_type::UNDIRECTED>& graph, vertex_id_t start_vertex);
+[[nodiscard]] std::optional<tree<V, E, graph_type::UNDIRECTED>>
+prim_minimum_spanning_tree(const graph<V, E, graph_type::UNDIRECTED>& graph,
+                           vertex_id_t start_vertex);
 
 }  // namespace graaf::algorithm
 

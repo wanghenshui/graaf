@@ -4,27 +4,27 @@
 
 namespace graaf {
 
-
 template <typename VERTEX_T, typename EDGE_T, graph_type GRAPH_TYPE_V>
 tree<VERTEX_T, EDGE_T, GRAPH_TYPE_V>::tree(graph_t&& graph)
-  : graph_{std::move(graph)} {
-    std::size_t highest_degree{0};
-    for (const auto& [vertex_id, _] : graph_.get_vertices()) {
-      const auto degree{properties::vertex_degree(graph_, vertex_id)};
+    : graph_{std::move(graph)} {
+  std::size_t highest_degree{0};
+  for (const auto& [vertex_id, _] : graph_.get_vertices()) {
+    const auto degree{properties::vertex_degree(graph_, vertex_id)};
 
-      if (degree > highest_degree) {
-        highest_degree = degree;
-        root_ = vertex_id;
-      }
+    if (degree > highest_degree) {
+      highest_degree = degree;
+      root_ = vertex_id;
+    }
 
-      if (degree == 1) {
-        leafs_.insert(vertex_id);
-      }
+    if (degree == 1) {
+      leafs_.insert(vertex_id);
     }
   }
+}
 
 template <typename VERTEX_T, typename EDGE_T, graph_type GRAPH_TYPE_V>
-tree<VERTEX_T, EDGE_T, GRAPH_TYPE_V>::edges_t tree<VERTEX_T, EDGE_T, GRAPH_TYPE_V>::get_edges() const {
+tree<VERTEX_T, EDGE_T, GRAPH_TYPE_V>::edges_t
+tree<VERTEX_T, EDGE_T, GRAPH_TYPE_V>::get_edges() const {
   edges_t result{};
 
   for (const auto& [id, edge] : graph_.get_edges()) {
@@ -35,7 +35,8 @@ tree<VERTEX_T, EDGE_T, GRAPH_TYPE_V>::edges_t tree<VERTEX_T, EDGE_T, GRAPH_TYPE_
 }
 
 template <typename V, typename E, graph_type T>
-tree<V,E,T> tree_from_graph(const graph<V, E, T>& input_graph, const std::vector<edge_id_t>& tree_edges) {
+tree<V, E, T> tree_from_graph(const graph<V, E, T>& input_graph,
+                              const std::vector<edge_id_t>& tree_edges) {
   graph<V, E, T> result{};
 
   const auto add_vertex_if_missing{[&](vertex_id_t id) {
@@ -54,4 +55,4 @@ tree<V,E,T> tree_from_graph(const graph<V, E, T>& input_graph, const std::vector
   return tree{std::move(result)};
 }
 
-}
+}  // namespace graaf
