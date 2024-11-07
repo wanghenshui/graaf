@@ -17,7 +17,7 @@ class tree {
 
   [[nodiscard]] vertex_id_t get_root() const { return root_; }
 
-  [[nodiscard]] const graph_t::vertices_t& get_leafs() const { return leafs_; }
+  [[nodiscard]] const graph_t::vertices_t& get_leaves() const { return leaves_; }
 
   [[nodiscard]] edges_t get_edges() const;
 
@@ -53,7 +53,7 @@ class tree {
  private:
   graph_t graph_{};
   vertex_id_t root_{};
-  graph_t::vertices_t leafs_{};
+  graph_t::vertices_t leaves_{};
 };
 
 template <typename V, typename E, graph_type T>

@@ -20,10 +20,10 @@ TEST(TreeTest, TreeWithRootAndTwoLeafs) {
   // THEN
   EXPECT_EQ(tree.get_root(), vertex_0);
 
-  const auto& leafs{tree.get_leafs()};
-  EXPECT_EQ(leafs.size(), 2);
-  EXPECT_TRUE(leafs.contains(vertex_1));
-  EXPECT_TRUE(leafs.contains(vertex_2));
+  const auto& leaves{tree.get_leaves()};
+  EXPECT_EQ(leaves.size(), 2);
+  EXPECT_TRUE(leaves.contains(vertex_1));
+  EXPECT_TRUE(leaves.contains(vertex_2));
 }
 
 TEST(TreeTest, TreeWithRootAndFiveLeafs) {
@@ -49,13 +49,13 @@ TEST(TreeTest, TreeWithRootAndFiveLeafs) {
   // THEN
   EXPECT_EQ(tree.get_root(), vertex_0);
 
-  const auto& leafs{tree.get_leafs()};
-  EXPECT_EQ(leafs.size(), 5);
-  EXPECT_TRUE(leafs.contains(vertex_1));
-  EXPECT_TRUE(leafs.contains(vertex_3));
-  EXPECT_TRUE(leafs.contains(vertex_4));
-  EXPECT_TRUE(leafs.contains(vertex_5));
-  EXPECT_TRUE(leafs.contains(vertex_6));
+  const auto& leaves{tree.get_leaves()};
+  EXPECT_EQ(leaves.size(), 5);
+  EXPECT_TRUE(leaves.contains(vertex_1));
+  EXPECT_TRUE(leaves.contains(vertex_3));
+  EXPECT_TRUE(leaves.contains(vertex_4));
+  EXPECT_TRUE(leaves.contains(vertex_5));
+  EXPECT_TRUE(leaves.contains(vertex_6));
 }
 
 TEST(TreeTest, ConstructTreeFromGraph) {
@@ -78,10 +78,10 @@ TEST(TreeTest, ConstructTreeFromGraph) {
   // THEN
   EXPECT_EQ(tree.get_root(), vertex_0);
 
-  const auto& leafs{tree.get_leafs()};
-  EXPECT_EQ(leafs.size(), 2);
-  EXPECT_TRUE(leafs.contains(vertex_1));
-  EXPECT_TRUE(leafs.contains(vertex_2));
+  const auto& leaves{tree.get_leaves()};
+  EXPECT_EQ(leaves.size(), 2);
+  EXPECT_TRUE(leaves.contains(vertex_1));
+  EXPECT_TRUE(leaves.contains(vertex_2));
 }
 
 }  // namespace graaf

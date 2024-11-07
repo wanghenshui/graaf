@@ -17,7 +17,7 @@ tree<VERTEX_T, EDGE_T, GRAPH_TYPE_V>::tree(graph_t&& graph)
     }
 
     if (degree == 1) {
-      leafs_.insert(vertex_id);
+      leaves_.insert(vertex_id);
     }
   }
 }
