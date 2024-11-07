@@ -1,19 +1,9 @@
+#include <vector>
+
 #include <graaflib/tree.h>
 #include <gtest/gtest.h>
 
 namespace graaf {
-
-TEST(TreeTest, TreeWithSingleVertex) {
-  // GIVEN - a tree with a single vertex
-  undirected_graph<int, int> graph{};
-  const auto vertex_0{graph.add_vertex(0)};
-
-  // WHEN
-  tree tree{std::move(graph)};
-
-  // THEN
-  EXPECT_EQ(tree.get_root(), vertex_0);
-}
 
 TEST(TreeTest, TreeWithRootAndTwoLeafs) {
   // GIVEN - a tree with a root and two leafs
@@ -66,6 +56,33 @@ TEST(TreeTest, TreeWithRootAndFiveLeafs) {
   EXPECT_TRUE(leafs.contains(vertex_4));
   EXPECT_TRUE(leafs.contains(vertex_5));
   EXPECT_TRUE(leafs.contains(vertex_6));
+}
+
+TEST(TreeTest, ConstructTreeFromGraph) {
+  // GIVEN - a graph which is not a tree, and a subset of edges which forms a tree
+  undirected_graph<int, int> graph{};
+  const auto vertex_0{graph.add_vertex(0)};
+  const auto vertex_1{graph.add_vertex(1)};
+  const auto vertex_2{graph.add_vertex(2)};
+  graph.add_edge(vertex_0, vertex_1, 10);
+  graph.add_edge(vertex_0, vertex_2, 11);
+  graph.add_edge(vertex_1, vertex_2, 12);
+
+  std::vector<edge_id_t> tree_edges{
+    edge_id_t{vertex_0, vertex_1},
+      edge_id_t{vertex_0, vertex_2}
+  };
+
+  // WHEN
+  tree tree{tree_from_graph(graph, tree_edges)};
+
+  // THEN
+  EXPECT_EQ(tree.get_root(), vertex_0);
+  
+  const auto& leafs{tree.get_leafs()};
+  EXPECT_EQ(leafs.size(), 2);
+  EXPECT_TRUE(leafs.contains(vertex_1));
+  EXPECT_TRUE(leafs.contains(vertex_2));
 }
 
 }

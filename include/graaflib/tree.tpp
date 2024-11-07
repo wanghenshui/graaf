@@ -4,6 +4,7 @@
 
 namespace graaf {
 
+
 template <typename VERTEX_T, typename EDGE_T, graph_type GRAPH_TYPE_V>
 tree<VERTEX_T, EDGE_T, GRAPH_TYPE_V>::tree(graph_t&& graph)
   : graph_{std::move(graph)} {
@@ -21,5 +22,25 @@ tree<VERTEX_T, EDGE_T, GRAPH_TYPE_V>::tree(graph_t&& graph)
       }
     }
   }
+
+template <typename V, typename E, graph_type T>
+tree<V,E,T> tree_from_graph(const graph<V, E, T>& input_graph, const std::vector<edge_id_t>& tree_edges) {
+  graph<V, E, T> result{};
+
+  const auto add_vertex_if_missing{[&](vertex_id_t id) {
+    if (!result.has_vertex(id)) {
+      result.add_vertex(input_graph.get_vertex(id), id);
+    }
+  }};
+
+  for (const auto& [lhs_id, rhs_id] : tree_edges) {
+    add_vertex_if_missing(lhs_id);
+    add_vertex_if_missing(rhs_id);
+
+    result.add_edge(lhs_id, rhs_id, input_graph.get_edge(lhs_id, rhs_id));
+  }
+
+  return tree{std::move(result)};
+}
 
 }
