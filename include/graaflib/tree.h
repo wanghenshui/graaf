@@ -23,6 +23,16 @@ class tree {
 
     [[nodiscard]] bool empty() const { return graph_.vertex_count() == 0; }
 
+    [[nodiscard]] graph_t::vertex_t& get_vertex(vertex_id_t vertex_id) { return graph_.get_vertex(vertex_id); }
+    [[nodiscard]] const graph_t::vertex_t& get_vertex(vertex_id_t vertex_id) const { return graph_.get_vertex(vertex_id); }
+
+    [[nodiscard]] graph_t::edge_t& get_edge(vertex_id_t vertex_id_lhs, vertex_id_t vertex_id_rhs) { return graph_.get_edge(vertex_id_lhs, vertex_id_rhs); }
+    [[nodiscard]] const graph_t::edge_t& get_edge(vertex_id_t vertex_id_lhs, vertex_id_t vertex_id_rhs) const { return graph_.get_edge(vertex_id_lhs, vertex_id_rhs); }
+    [[nodiscard]] graph_t::edge_t& get_edge(edge_id_t edge_id) { return graph_.get_edge(edge_id); }
+    [[nodiscard]] const graph_t::edge_t& get_edge(edge_id_t edge_id) const { return graph_.get_edge(edge_id); }
+
+    [[nodiscard]] graph_t::vertices_t get_neighbors(vertex_id_t vertex_id) const { return graph_.get_neighbors(vertex_id); }
+
   private:
     graph_t graph_{};
     vertex_id_t root_{};
