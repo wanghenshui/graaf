@@ -30,7 +30,7 @@ template <class GRAPH_T>
 };  // namespace detail
 
 template <typename V, typename E>
-std::optional<std::vector<edge_id_t>> prim_minimum_spanning_tree(
+std::optional<tree<V, E, graph_type::UNDIRECTED>> prim_minimum_spanning_tree(
     const graph<V, E, graph_type::UNDIRECTED>& graph,
     vertex_id_t start_vertex) {
   std::vector<edge_id_t> edges_in_mst{};
@@ -58,7 +58,7 @@ std::optional<std::vector<edge_id_t>> prim_minimum_spanning_tree(
     fringe_vertices.insert(mst_edge.second);
   }
 
-  return edges_in_mst;
+  return tree_from_graph(graph, edges_in_mst);
 }
 
 };  // namespace graaf::algorithm

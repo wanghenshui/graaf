@@ -84,7 +84,7 @@ TEST(PrimMstTest, SingleEdge) {
   ASSERT_TRUE(mst.has_value());
 
   const edge_set_t expected_edges{{start_vertex, vertex_1}};
-  ASSERT_TRUE(compare_mst(mst.value(), expected_edges));
+  ASSERT_TRUE(compare_mst(mst.value().get_edges(), expected_edges));
 }
 
 TEST(PrimMstTest, TreeGraphStartAtRoot) {
@@ -107,7 +107,7 @@ TEST(PrimMstTest, TreeGraphStartAtRoot) {
                                   {vertex_ids[2], vertex_ids[3]},
                                   {vertex_ids[2], vertex_ids[4]}};
 
-  ASSERT_TRUE(compare_mst(mst.value(), expected_edges));
+  ASSERT_TRUE(compare_mst(mst.value().get_edges(), expected_edges));
 }
 
 TEST(PrimMstTest, TreeGraphStartAtLeaf) {
@@ -130,7 +130,7 @@ TEST(PrimMstTest, TreeGraphStartAtLeaf) {
                                   {vertex_ids[2], vertex_ids[3]},
                                   {vertex_ids[2], vertex_ids[4]}};
 
-  ASSERT_TRUE(compare_mst(mst.value(), expected_edges));
+  ASSERT_TRUE(compare_mst(mst.value().get_edges(), expected_edges));
 }
 
 TEST(PrimMstTest, SimpleGraph) {
@@ -151,7 +151,7 @@ TEST(PrimMstTest, SimpleGraph) {
                                   {vertex_ids[2], vertex_ids[3]},
                                   {vertex_ids[3], vertex_ids[4]}};
 
-  ASSERT_TRUE(compare_mst(mst.value(), expected_edges));
+  ASSERT_TRUE(compare_mst(mst.value().get_edges(), expected_edges));
 }
 
 }  // namespace graaf::algorithm

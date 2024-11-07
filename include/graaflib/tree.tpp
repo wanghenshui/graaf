@@ -23,6 +23,17 @@ tree<VERTEX_T, EDGE_T, GRAPH_TYPE_V>::tree(graph_t&& graph)
     }
   }
 
+template <typename VERTEX_T, typename EDGE_T, graph_type GRAPH_TYPE_V>
+tree<VERTEX_T, EDGE_T, GRAPH_TYPE_V>::edges_t tree<VERTEX_T, EDGE_T, GRAPH_TYPE_V>::get_edges() const {
+  edges_t result{};
+
+  for (const auto& [id, edge] : graph_.get_edges()) {
+    result.push_back(id);
+  }
+
+  return result;
+}
+
 template <typename V, typename E, graph_type T>
 tree<V,E,T> tree_from_graph(const graph<V, E, T>& input_graph, const std::vector<edge_id_t>& tree_edges) {
   graph<V, E, T> result{};

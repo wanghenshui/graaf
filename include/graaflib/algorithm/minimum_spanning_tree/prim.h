@@ -1,6 +1,7 @@
 #pragma once
 
 #include <graaflib/graph.h>
+#include <graaflib/tree.h>
 #include <graaflib/types.h>
 
 #include <optional>
@@ -20,7 +21,7 @@ namespace graaf::algorithm {
  * connected).
  */
 template <typename V, typename E>
-[[nodiscard]] std::optional<std::vector<edge_id_t> > prim_minimum_spanning_tree(
+[[nodiscard]] std::optional<tree<V, E, graph_type::UNDIRECTED>> prim_minimum_spanning_tree(
     const graph<V, E, graph_type::UNDIRECTED>& graph, vertex_id_t start_vertex);
 
 }  // namespace graaf::algorithm

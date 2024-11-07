@@ -19,6 +19,10 @@ class tree {
 
     [[nodiscard]] const graph_t::vertices_t& get_leafs() const { return leafs_; }
 
+    [[nodiscard]] edges_t get_edges() const;
+
+    [[nodiscard]] bool empty() const { return graph_.vertex_count() == 0; }
+
   private:
     graph_t graph_{};
     vertex_id_t root_{};
